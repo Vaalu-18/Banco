@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.03.23 a las 12:19:20 PM CST 
+// Generado el: 2020.04.02 a las 07:10:47 PM CST 
 //
 
 
@@ -10,6 +10,7 @@ package me.cobrar.banco;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -24,7 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="tarjeta" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="tarjeta" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="monto" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,27 +37,54 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "tarjeta"
+    "tarjeta",
+    "monto"
 })
 @XmlRootElement(name = "CobrarRequest")
 public class CobrarRequest {
 
-    protected int tarjeta;
+    @XmlElement(required = true)
+    protected String tarjeta;
+    protected int monto;
 
     /**
      * Obtiene el valor de la propiedad tarjeta.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getTarjeta() {
+    public String getTarjeta() {
         return tarjeta;
     }
 
     /**
      * Define el valor de la propiedad tarjeta.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setTarjeta(int value) {
+    public void setTarjeta(String value) {
         this.tarjeta = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad monto.
+     * 
+     */
+    public int getMonto() {
+        return monto;
+    }
+
+    /**
+     * Define el valor de la propiedad monto.
+     * 
+     */
+    public void setMonto(int value) {
+        this.monto = value;
     }
 
 }
