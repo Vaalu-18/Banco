@@ -11,6 +11,16 @@ public class Conexion {
 	String url="jdbc:mysql://"+host+":"+puerto+"/"+bd+"?useTimezone=true&serverTimezone=UTC";
 	String usuario="banco";
 	String contra="090699Banco@20";
+	/**
+	 * Metodo para conectar el sistema a la Base de Datos
+	 * @param bd -usado para ingresar a la base de datos
+	 * @param host - usado para saber hacía a donde se va a dirigir y¿e intentar conectarse
+	 * @param puerto - usado para indicar la interfaz de entrada
+	 * @param url - Cadena completa perteneciente a lo solicitado para realizar una conexión exitosa
+	 * @param usuario - Indicar por medio de que usuario se va a acceder a la Base de Datos, se debe tener en cuenta que este usuario debe existir
+	 * @param contra - Indica la contraseña del usuariopor el cual se va a aingresar a la Base de Datos
+	 * @return 
+	 */
 	public Connection getConnection() {
 		try {
 			cn = DriverManager.getConnection(url, usuario, contra);
