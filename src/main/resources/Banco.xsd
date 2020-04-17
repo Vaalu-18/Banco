@@ -8,6 +8,8 @@
 			<complexType>
 				<sequence>
 					<element name="tarjeta" type="string"></element>
+					<element name="caducidad" type="string"></element>
+					<element name="cvv" type="int"></element>
 					<element name="monto" type="int"></element>
 				</sequence>
 			</complexType>

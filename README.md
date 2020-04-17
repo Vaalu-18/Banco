@@ -2,9 +2,10 @@
 
 ## Descripción
 
-Sistema web de un banco
+Sistema web de un banco.
+El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 16) y menor 7750 (primeros 4 dígitos de 16)
 
-[Servicio]: http://3.83.142.54:9191/banco.wsdl
+[Servicio]: http://3.83.142.54:9191/banco.wsdl	"Banco"
 
 ## Funcionalidades
 
@@ -14,12 +15,14 @@ Sistema web de un banco
 
 ## Diagrama de clases
 
-#### Banco
+#### Tarjeta
 
 | Atributo |  Tipo  |
 | :------: | :----: |
-| Tarjeta  | String |
-|  Monto   |  int   |
+| tarjeta  | String |
+| fechacad | String |
+|   cvv    |  int   |
+|  monto   |  int   |
 
 ## Métodos
 
@@ -44,6 +47,26 @@ Sistema web de un banco
     - Se ingreso una cadena de 16 caracteres pero contiene dígitos alfabéticos
 
       Se muestra mensaje: "Transacción cancelada. El numero de tarjeta ejecutiva que ha ingresado no pertenece al sistema de tarjetas permitido. Por favor, ingrese un numero de tarjeta valido (16 dígitos numéricos)"
+      
+    - Se ingreso una cadena de fecha de caducidad mayor o menor a 4 dígitos
+
+      Se muestra mensaje: "La fecha de caducidad debe contener sólo 4 dígitos(mm/aa)"
+
+    - Se ingreso una cadena de fecha de caducidad donde el mes (mm) es 0 o mayor a 12 y el año (aa) es 0 o mayor a 99
+
+      Se muestra mensaje: "La fecha ingresada es incorrecta. Por favor, ingrese una fecha que este dentro del formato permitido (mmaa)" 
+
+    - Se ingreso una cadena de fecha de caducidad y la tarjeta ya caducó
+
+      Se muestra mensaje: "Su tarjeta se encuentra caducada. Por favor acuda a su banco más cercano para una renovación"
+
+    - Se ingreso un código cvv mayor o menor a 3
+
+      Se muestra el mensaje: "El código cvv sólo está compuesto por 3 digitos numéricos, ingrese correctamente el cvv"
+
+    - No se pudo ingresar los datos a la base de datos
+
+      Se muestra mensaje: "Banco 3: No se ha podido realizar el registro de su pago debido a un problema en la Base de Datos"
 
   - Excepciones
 

@@ -5,6 +5,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import controlador.OperacionDAO;
 import me.cobrar.banco.CobrarRequest;
 import me.cobrar.banco.CobrarResponse;
 import me.cobrar.banco.ReembolsoRequest;
@@ -23,20 +24,141 @@ public class EndPoint {
 			if(peticion.getTarjeta().matches("[0-9]*")) {
 				int i = Integer.parseInt(peticion.getTarjeta().substring(0, 4));
 				if(i>= 5500 && i<= 7749) {
-					respuesta.setRespuesta("\n"+"Banco 3: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion: "+ "XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+					if(peticion.getCaducidad().matches("[0-9]*")) {
+						if(peticion.getCaducidad().length()==4) {
+							int o= Integer.parseInt(peticion.getCaducidad().substring(0,2));
+							int u= Integer.parseInt(peticion.getCaducidad().substring(2, 4));
+							if((o<13 && o>0)&&(u>0 && u<100)) {
+								if(o<4 && u==20) {
+									respuesta.setRespuesta("\n"+"Su tarjeta se encuentra caducada"+"\n"+"Por favor acuda a su banco más cercano para una renovación"+"\n");
+								}else {
+									String cvv= String.valueOf(peticion.getCvv());
+									if(cvv.length()<3 || cvv.length()>3) {
+										respuesta.setRespuesta("\n"+"El código cvv sólo está compuesto por 3 digitos numéricos, ingrese correctamente el cvv"+"\n");
+									}else {
+										OperacionDAO cobro= new OperacionDAO(peticion.getTarjeta(), peticion.getCaducidad(), peticion.getCvv(), peticion.getMonto());
+										if(cobro.registrarPago()) {
+											respuesta.setRespuesta("\n"+"Banco 3: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion: "+ "XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+										}else {
+											respuesta.setRespuesta("\n"+"Banco 3: No se ha podido realizar el registro de su pago debido a un problema en la Base de Datos");
+										}
+									}
+								}
+							}else {
+								respuesta.setRespuesta("\n"+"La fecha ingresada es incorrecta"+"\n"+"Por favor, ingrese una fecha que este dentro del formato permitido (mmaa)");
+							}
+						}else {
+							if(peticion.getCaducidad().length()<4) {
+								respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener 4 dígitos (mm/aa)"+"\n");
+							}else {
+								if(peticion.getCaducidad().length()>4) {
+									respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener sólo 4 dígitos(mm/aa)"+"\n");
+								}
+							}
+						}
+					}else {
+						respuesta.setRespuesta("\n"+"La fecha de caducidad debe ser introducidad en datos numéricos, iniciando por el mes (mm) y seguido por el año (aa)."+"\n");
+					}
 				}else {
 					if(i>=1000 && i<=3249) {
-						respuesta.setRespuesta("\n"+
-								"Cargo en proceso..." +"\n"+ "La tarjeta: "+ peticion.getTarjeta().substring(12, 16)+ " pertenece a otro banco."+"\n"+"En seguida estableceremos una conexion con el para poder realizar el cargo..."+"\n"+
-								"Banco 1: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion:"+ "XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+						if(peticion.getCaducidad().matches("[0-9]*")) {
+							if(peticion.getCaducidad().length()==4) {
+								int o= Integer.parseInt(peticion.getCaducidad().substring(0,2));
+								int u= Integer.parseInt(peticion.getCaducidad().substring(2, 4));
+								if((o<13 && o>0)&&(u>0 && u<100)) {
+									if(o<4 && u==20) {
+										respuesta.setRespuesta("\n"+"Su tarjeta se encuentra caducada"+"\n"+"Por favor acuda a su banco más cercano para una renovación"+"\n");
+									}else {
+										String cvv= String.valueOf(peticion.getCvv());
+										if(cvv.length()<3 || cvv.length()>3) {
+											respuesta.setRespuesta("\n"+"El código cvv sólo está compuesto por 3 digitos numéricos, ingrese correctamente el cvv"+"\n");
+										}else {
+											respuesta.setRespuesta("\n"+
+													"Cargo en proceso..." +"\n"+ "La tarjeta: "+ peticion.getTarjeta().substring(12, 16)+ " pertenece a otro banco."+"\n"+"En seguida estableceremos una conexion con el para poder realizar el cargo..."+"\n"+
+													"Banco 1: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion:"+ "XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+										}
+									}
+								}else {
+									respuesta.setRespuesta("\n"+"La fecha ingresada es incorrecta"+"\n"+"Por favor, ingrese una fecha que este dentro del formato permitido (mmaa)");
+								}
+							}else {
+								if(peticion.getCaducidad().length()<4) {
+									respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener 4 dígitos (mm/aa)"+"\n");
+								}else {
+									if(peticion.getCaducidad().length()>4) {
+										respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener sólo 4 dígitos(mm/aa)"+"\n");
+									}
+								}
+							}
+						}else {
+							respuesta.setRespuesta("\n"+"La fecha de caducidad debe ser introducidad en datos numéricos, iniciando por el mes (mm) y seguido por el año (aa)."+"\n");
+						}
 					}else if(i>=3250 && i<=5499) {
-						respuesta.setRespuesta("\n"+
-								"Cargo en proceso..." +"\n"+ "La tarjeta: "+ peticion.getTarjeta().substring(12, 16)+ " pertenece a otro banco."+"\n"+"En seguida estableceremos una conexion con el para poder realizar el cargo..."+"\n"+
-								"Banco 2: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion: "+"XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+						if(peticion.getCaducidad().matches("[0-9]*")) {
+							if(peticion.getCaducidad().length()==4) {
+								int o= Integer.parseInt(peticion.getCaducidad().substring(0,2));
+								int u= Integer.parseInt(peticion.getCaducidad().substring(2, 4));
+								if((o<13 && o>0)&&(u>0 && u<100)) {
+									if(o<4 && u==20) {
+										respuesta.setRespuesta("\n"+"Su tarjeta se encuentra caducada"+"\n"+"Por favor acuda a su banco más cercano para una renovación"+"\n");
+									}else {
+										String cvv= String.valueOf(peticion.getCvv());
+										if(cvv.length()<3 || cvv.length()>3) {
+											respuesta.setRespuesta("\n"+"El código cvv sólo está compuesto por 3 digitos numéricos, ingrese correctamente el cvv"+"\n");
+										}else {
+											respuesta.setRespuesta("\n"+
+													"Cargo en proceso..." +"\n"+ "La tarjeta: "+ peticion.getTarjeta().substring(12, 16)+ " pertenece a otro banco."+"\n"+"En seguida estableceremos una conexion con el para poder realizar el cargo..."+"\n"+
+													"Banco 2: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion: "+"XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+										}
+									}
+								}else {
+									respuesta.setRespuesta("\n"+"La fecha ingresada es incorrecta"+"\n"+"Por favor, ingrese una fecha que este dentro del formato permitido (mmaa)");
+								}
+							}else {
+								if(peticion.getCaducidad().length()<4) {
+									respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener 4 dígitos (mm/aa)"+"\n");
+								}else {
+									if(peticion.getCaducidad().length()>4) {
+										respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener sólo 4 dígitos(mm/aa)"+"\n");
+									}
+								}
+							}
+						}else {
+							respuesta.setRespuesta("\n"+"La fecha de caducidad debe ser introducidad en datos numéricos, iniciando por el mes (mm) y seguido por el año (aa)."+"\n");
+						}
 					}else if(i>=7750 && i<= 9999) {
-						respuesta.setRespuesta("\n"+
-								"Cargo en proceso..." +"\n"+ "La tarjeta: "+ peticion.getTarjeta().substring(12, 16)+ " pertenece a otro banco."+"\n"+"En seguida estableceremos una conexion con el para poder realizar el cargo..."+"\n"+
-								"Banco 4: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion: "+"XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+						if(peticion.getCaducidad().matches("[0-9]*")) {
+							if(peticion.getCaducidad().length()==4) {
+								int o= Integer.parseInt(peticion.getCaducidad().substring(0,2));
+								int u= Integer.parseInt(peticion.getCaducidad().substring(2, 4));
+								if((o<13 && o>0)&&(u>0 && u<100)) {
+									if(o<4 && u==20) {
+										respuesta.setRespuesta("\n"+"Su tarjeta se encuentra caducada"+"\n"+"Por favor acuda a su banco más cercano para una renovación"+"\n");
+									}else {
+										String cvv= String.valueOf(peticion.getCvv());
+										if(cvv.length()<3 || cvv.length()>3) {
+											respuesta.setRespuesta("\n"+"El código cvv sólo está compuesto por 3 digitos numéricos, ingrese correctamente el cvv"+"\n");
+										}else {
+											respuesta.setRespuesta("\n"+
+													"Cargo en proceso..." +"\n"+ "La tarjeta: "+ peticion.getTarjeta().substring(12, 16)+ " pertenece a otro banco."+"\n"+"En seguida estableceremos una conexion con el para poder realizar el cargo..."+"\n"+
+													"Banco 4: Se ha realizado un cargo a la tarjeta ejecutiva con terminacion: "+"XXXX-XXXX-XXXX-"+peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $"+ peticion.getMonto()  +".00 con número de autorización");
+										}
+									}
+								}else {
+									respuesta.setRespuesta("\n"+"La fecha ingresada es incorrecta"+"\n"+"Por favor, ingrese una fecha que este dentro del formato permitido (mmaa)");
+								}
+							}else {
+								if(peticion.getCaducidad().length()<4) {
+									respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener 4 dígitos (mm/aa)"+"\n");
+								}else {
+									if(peticion.getCaducidad().length()>4) {
+										respuesta.setRespuesta("\n"+"La fecha de caducidad debe contener sólo 4 dígitos(mm/aa)"+"\n");
+									}
+								}
+							}
+						}else {
+							respuesta.setRespuesta("\n"+"La fecha de caducidad debe ser introducidad en datos numéricos, iniciando por el mes (mm) y seguido por el año (aa)."+"\n");
+						}
 					}
 				}
 			}else {
@@ -60,7 +182,12 @@ public class EndPoint {
 			if(peticion.getTarjeta().matches("[0-9]*")) {
 				int i = Integer.parseInt(peticion.getTarjeta().substring(0, 4));
 				if(i>= 5500 && i<= 7749) {
-					respuesta.setRespuesta("\n"+"Banco 3: Se ha realizado un reembolso a la tarjeta ejecutiva con terminacion: "+"XXXX-XXXX-XXXX-"+ peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $" + peticion.getMonto() + ".00 \n Gracias por su confianza");
+					OperacionDAO reembolso= new OperacionDAO(peticion.getTarjeta(), peticion.getMonto());
+					if(reembolso.realizarReembolso()) {
+						respuesta.setRespuesta("\n"+"Banco 3: Se ha realizado un reembolso a la tarjeta ejecutiva con terminacion: "+"XXXX-XXXX-XXXX-"+ peticion.getTarjeta().substring(12, 16) + " por la cantidad de: $" + peticion.getMonto() + ".00 \n Gracias por su confianza");
+					}else {
+						respuesta.setRespuesta("\n"+"No existe un pago registrado con dichos datos, comprueba que los campos ingresados son los correctos"+"\n");
+					}
 				}else {
 					if(i>=1000 && i<=3249) {
 						respuesta.setRespuesta("\n"+
