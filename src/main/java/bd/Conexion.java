@@ -9,15 +9,9 @@ public class Conexion {
 	String host="localhost";
 	String puerto= "3306";
 	String url="jdbc:mysql://"+host+":"+puerto+"/"+bd+"?useTimezone=true&serverTimezone=UTC";
-	String usuario="root";
-	String contra="090699Omar18";
+	String usuario="banco";
+	String contra="090699Banco@20";
 	public Connection getConnection() {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.exit(-1);
-		}
 		try {
 			cn = DriverManager.getConnection(url, usuario, contra);
 		}catch(SQLException e) {
