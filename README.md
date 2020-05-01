@@ -5,10 +5,7 @@
 Sistema web de un banco.
 El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 16) y menor 7750 (primeros 4 dígitos de 16)
 
-<<<<<<< HEAD
->>>>>>> origin/master
 [Servicio](http://3.83.142.54:9191/banco.wsdl)
-=======
 
 ## Funcionalidades
 
