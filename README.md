@@ -26,7 +26,7 @@ El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 
 
 ## Mapa de actores
 
-![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\mapaactores.png)
+![](https://github.com/Vaalu-18/Banco/tree/master/imagenes/mapaactores.png)
 
 ## Casos de uso
 
