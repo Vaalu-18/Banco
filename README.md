@@ -6,6 +6,7 @@ Sistema web de un banco.
 El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 16) y menor 7750 (primeros 4 dígitos de 16)
 
 <<<<<<< HEAD
+
 [Servicio]: http://3.83.142.54:9191/banco.wsdl	"Banco"
 =======
 [Servicio](http://3.83.142.54:9191/banco.wsdl)
@@ -27,6 +28,30 @@ El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 
 | fechacad | String |
 |   cvv    |  int   |
 |  monto   |  int   |
+
+## Mapa de actores
+
+![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\mapaactores.png)
+
+## Casos de uso
+
+![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\casosdeuso.png)
+
+## Descripción CU-01
+
+![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\casodeusouno.png)
+
+## Descripción CU-02
+
+![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\casodeusodos.png)
+
+## Diagrama de actividades
+
+![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\diagramadeactividades.png)
+
+## Diagrama de componentes
+
+![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\diagramadecomponentes.png)
 
 ## Métodos
 
