@@ -30,23 +30,23 @@ El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 
 
 ## Casos de uso
 
-![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\casosdeuso.png)
+![](https://github.com/Vaalu-18/Banco/blob/master/imagenes/casosdeuso.png)
 
 ## Descripción CU-01
 
-![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\casodeusouno.png)
+![](https://github.com/Vaalu-18/Banco/blob/master/imagenes/casodeusouno.png)
 
 ## Descripción CU-02
 
-![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\casodeusodos.png)
+![](https://github.com/Vaalu-18/Banco/blob/master/imagenes/casodeusodos.png)
 
 ## Diagrama de actividades
 
-![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\diagramadeactividades.png)
+![](https://github.com/Vaalu-18/Banco/blob/master/imagenes/diagramadeactividades.png)
 
 ## Diagrama de componentes
 
-![](C:\Users\omar_\Documents\Tecnologias Para la Integración de Soluciones\diagramadecomponentes.png)
+![](https://github.com/Vaalu-18/Banco/blob/master/imagenes/diagramadecomponentes.png)
 
 ## Métodos
 
