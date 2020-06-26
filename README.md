@@ -7,7 +7,7 @@ El banco #03 guarda tarjetas con numeración mayor a 55 (primeros 2 dígitos de 
 
 [Servicio](http://3.83.142.54:9191/banco.wsdl)
 
-[Cliente](http://3.83.142.54/Servicios/html/destinos.html)
+[Cliente](http://3.83.142.54/Aerolinea/html/destinos.html)
 
 ## Funcionalidades
 
