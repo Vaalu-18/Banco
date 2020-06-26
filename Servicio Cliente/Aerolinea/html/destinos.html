@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/stilos.css">
+    <script src="https://kit.fontawesome.com/39bf24cc1b.js" crossorigin="anonymous"></script>
+    
+</head>
+<body onload="obtenerDestinos()">
+    <div id="content-wrapper" class="d-flex toggled">
+      <div id="slidebar-container" class="bg-light border-right">
+        <div class="logo">
+          <div class="parteGenero"> 
+            <h3>Agencia de viajes</h3>
+          </div>
+        </div>
+        <div class="menu list-group-flush">
+          <a onclick="cambiarCatalogo(this)" class="list-group-item list-group-item-action bg-light border-0" id="anclaIndex">Inicio</a>
+          <a onclick="cambiarCatalogo(this)" class="list-group-item list-group-item-action bg-light border-0" id="anclaVuelos">Vuelos</a>
+          <a href="#" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaDestinos">Destinos</a>
+          <a onclick="cambiarCatalogo(this)" class="list-group-item list-group-item-action bg-light border-0" id="anclaHoteles">Hotel</a>
+          <a href="clientes.html" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaClientes">Clientes</a>
+          <a href="habitaciones.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaHabitaciones">Habitaciones</a>
+          <a href="reservaciones.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaReservaciones">Reservaciones</a>
+          <a href="estancias.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaEstancias" style="display: none;">Estancias</a>
+          <div class="dropdown-divider"></div>
+          <a href="tarjetas.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaTarjetas" style="display: none;">Tarjetas</a>
+      </div>
+      </div>
+      <div id="page-container" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+          <button id="menu-toggle" class="btn btn-outline-white border-0">
+            <svg class="bi bi-justify" width="1.7em" height="1.7em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2 12.5a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <div >
+            <h2 class="text-center">AGENCIA DE VIAJES</h2>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown" id="liFormulario">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="aFormulario">
+                    <svg class="bi bi-person" width="1.8em" height="1.8em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
+                    </svg>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" style="width: 233px !important;" id="divFormulario">
+                    <div id="divContainerMenu">
+                      <form class="px-4 py-3" id="formularioInicioSesión" method="POST">
+                        <div class="form-group">
+                          <label for="exampleDropdownFormEmail1">Usuario</label>
+                          <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="mail" name="mail" placeholder="Maria ...">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleDropdownFormPassword1">Contraseña</label>
+                          <input type="password" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="password" name="password" placeholder="Contraseña">
+                        </div>
+                      </form>
+                      <button onclick="iniciarSesionUsuario()" id="btnInicioSesion" class="btn mx-4 btn btn-outline-success float-right">Iniciar Sesión</button>                     
+                      <br>
+                      <br>
+                    </div>
+                    <div id="divMenu" style="display: none;">
+                      <div class="dropdown-item" id="nombreUsuario">
+                        <h6 href="" id="hNombreUsuario" class="list-group-item list-group-item-action border-0"></h6>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        <div id="catalogo" class="p-4 mx-4 catalogoProductos">
+          <div id="divPintaCatalogo">
+              <div class="w-100">
+                <h3 style="display: inline;">Destinos</h3>
+                <button onclick="abrirPopUpRegistro()" type="button" class="btn btn-success float-right"><i class="fas fa-plane"></i> Añadir destino</button>
+              </div>
+              <br>
+              <div>                  
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+                      <li class="breadcrumb-item"><a href="#">Aerolínea</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Destinos</li>
+                    </ol>
+                  </nav>
+              </div>
+              <div class="overlay" id="overlay3" style="display: none; z-index: 1;">
+                  <div class="login-reg-panel" id="divPago" style="display: block;">
+                    <a onclick="cerrarPagoTarjeta(this)" id="btn-cerrar-popup" style="float:right; margin-right: 6px; cursor: pointer;" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>                                    
+                    <div class="register-info-box">
+                        <h2>BANET</h2>
+                        <h6>El banco más rápido de internet</h6>
+                    </div>                                    
+                    <div class="white-panel">
+                        <h2>Pago</h2>
+                        <div class="login-show">
+                            <form id="formularioPago">
+                              <input type="text" maxlength="19" placeholder="Tarjeta ejecutiva" id="escuchaTarjeta" name="escuchaTarjeta" onkeyup="escuchaTarjet(this)">
+                              <input type="text" maxlength="19" style="display: none;" placeholder="Tarjeta ejecutiva" id="escuchaTarjetaRepite" name="escuchaTarjetaRepite">
+                              <input type="text" maxlength="5" placeholder="Fecha de caducidad" id="escuchaFechaCad" name="escuchaFechaCad" onkeyup="escuchaFechaCa(this)">
+                              <input type="text" maxlength="5" placeholder="Fecha de caducidad" id="escuchaFechaCadRepite" name="escuchaFechaCadRepite" style="display:none;">
+                              <input type="text" maxlength="3" placeholder="cvv" id="cvv" name="cvv">
+                              <input type="text" maxlength="10" placeholder="Monto" id="monto" name="monto">
+                            </form>
+                            <input onclick="realizarPague()" type="button" value="Realizar pago">
+                        </div>
+                    </div>
+                  </div>
+              </div>
+              <div>
+                <table class="table" id="tablaClientes">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Avión</th>
+                                <th scope="col">Destino</th>
+                                <th scope="col">Costo</th>
+                                <th scope="col">Fecha de salida</th>
+                                <th scope="col">Hora de salida</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pintarFilas">
+
+                        </tbody>
+                    </tbody>
+                    </table> 
+                </table>
+              </div>
+              <div class="overlay" id="overlay" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpRegistroDestino(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Aerolínea</h2>
+                  <h3>Añadir destino</h3>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioRegistrarDestino" style="max-height: 280px;">
+                    <div class="contenedor-inputs">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombreAvion" name="txtNombreAvion" placeholder="Nombre del avión">  
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombreDestino" name="txtNombreDestino" placeholder="Destino">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtFechaVuelo" name="txtFechaVuelo" placeholder="Fecha de vuelo">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtHoraVuelo" name="txtHoraVuelo" placeholder="Hora de vuelo">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtCosto" name="txtCosto" placeholder="Costo">
+                      <br>
+                    </div>
+                  </form>
+                  <button onclick="" class=" btn mx-4 btn btn-outline-danger">cancelar</button>
+                  <button onclick="btnRegistroDestino()" class="btn-submit btn mx-4 btn btn-outline-success">Registrar destino</button>
+                  </div>
+                </div>
+              </div>
+              <div class="modalConfirmarEliminarDestino">
+                <div class="modal fade" id="modalConfirmarEliminarDestino" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar destino</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Estás seguro de querer eliminar este destino?</p>
+                        <p>Se perderá toda la información relacionada a este</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
+                        <button onclick="confirmarEliminarDestino()" type="submit" class="btn btn-outline-danger" data-dismiss="modal">Eliminar destino</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="overlay" id="overlay1" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpRegistroDestino(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Aerolínea</h2>
+                  <h3>Editar destino</h3>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioActualizarDestino" style="max-height: 280px;">
+                    <div class="contenedor-inputs">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombreAvion1" name="txtNombreAvion" placeholder="Nombre del avión">  
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombreDestino1" name="txtNombreDestino" placeholder="Destino">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtFechaVuelo1" name="txtFechaVuelo" placeholder="Fecha de vuelo">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtHoraVuelo1" name="txtHoraVuelo" placeholder="Hora de vuelo">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtCosto1" name="txtCosto" placeholder="Costo">
+                      <br>
+                    </div>
+                  </form>
+                  <button onclick="" class=" btn mx-4 btn btn-outline-danger">cancelar</button>
+                  <button onclick="btnActualizarDestino()" class="btn-submit btn mx-4 btn btn-outline-warning">Actualizar destino</button>
+                  </div>
+                </div>
+              </div>
+              <div class="overlay" id="overlay2" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpRegistroDestino(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Aerolínea</h2>
+                  <h3>Compra de pasajero</h3>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioComprarBoleto" style="max-height: 250px; overflow-y: scroll;">
+                    <div class="contenedor-inputs">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombrePasajero" name="txtNombrePasajero" placeholder="Nombre completo">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombreAvion2" name="txtNombreAvion" placeholder="Nombre del avión">  
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombreDestino2" name="txtNombreDestino" placeholder="Destino" style="width: 40%; float: left;">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtFechaVuelo2" name="txtFechaVuelo" placeholder="Fecha de vuelo" style="width: 40%; float: right; margin-right: 75px;">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtHoraVuelo2" name="txtHoraVuelo" placeholder="Hora de vuelo">
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtCosto2" name="txtCosto" placeholder="Costo">
+                      <label for="nombre" >Sala</label>
+                      <br>
+                      <select name="tipoSala" id="tipoSala">
+                        <option>Selecciona una sala</option>
+                        <option value="VIP">VIP</option>
+                        <option value="normal">normal</option>
+                      </select>
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtAsiento" name="txtAsiento" placeholder="Número de asiento"> 
+                    </div>
+                    <br>
+                    <br>
+                  </form>
+                  <button onclick="" class=" btn mx-4 btn btn-outline-danger">cancelar</button>
+                  <button onclick="btnSiguienteCompra()" class="btn-submit btn mx-4 btn btn-outline-success">Siguiente</button>
+                  </div>
+                </div>
+              </div>
+              <div class="overlay" id="overlay4" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpRegistroDestino(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Aerolínea</h2>
+                  <h3>Buscar mi boleto</h3>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioBuscarBoleto" style="max-height: 250px;">
+                    <div class="contenedor-inputs">
+                      <label for="nombre" >Nombre completo</label>
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNombrePasajeroBoleto" name="txtNombrePasajeroBoleto" placeholder="Nombre completo">
+                      <label for="nombre" >Fecha del vuelo</label>
+                      <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtFechaVueloBoleto" name="txtFechaVueloBoleto" placeholder="Fecha de vuelo">  
+                    </div>
+                    <br>
+                    <br>
+                  </form>
+                  <button onclick="" class=" btn mx-4 btn btn-outline-danger">cancelar</button>
+                  <button onclick="buscarBoleto()" class="btn-submit btn mx-4 btn btn-outline-success">Buscar mi boleto</button>
+                  </div>
+                </div>
+              </div>
+              <div class="overlay" id="overlay5" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpBuscarBoleto(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Datos del boleto</h2>
+                  <p id="pNotaAsiento" style="display: none;">Nota: solo puedes editar tu número de asiento, nombre y tipo de sala</p>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioActualizarCambiosBoleto" style="max-height: 250px; overflow-y: scroll;">
+                      <div class="contenedor-inputs" id="pintarBoleto">
+                        
+                      </div>
+                    <br>
+                    <br>
+                  </form>
+                  <button onclick="btnActualizaCompraBoleto()" class=" btn mx-4 btn btn-outline-warning" id="cambiarBotonesActualizar">Actualizar boleto</button>
+                  <button onclick="btnEliminarCompraBoleto()" class="btn-submit btn mx-4 btn btn-outline-danger" id="btnEliminarBoleto">Eliminar boleto</button>
+                  <button onclick="btnCancelaActualizacionBoleto()" class=" btn mx-4 btn btn-outline-secondary" style="display: none;" id="cancelarActualizacionBoleto">Cancelar</button>
+                  <button onclick="btnActualizaBoleto()" class=" btn mx-4 btn btn-outline-success" style="display: none;" id="guardarCambiosBoleto">Guardar cambios</button>
+                  </div>
+                </div>
+              </div>
+              <div class="modalConfirmarEliminarBoleto">
+                <div class="modal fade" id="modalConfirmarEliminarBoleto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Cancelar compra</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Estás seguro de querer cancelar tu boleto?</p>
+                        <p>Perdeás la oportunidad de poder viajar</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
+                        <button onclick="confirmarEliminarBoleto()" type="submit" class="btn btn-outline-danger" data-dismiss="modal">Cancelar boleto</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script>
+    $("#menu-toggle").click(function (e){
+      e.preventDefault();
+      $('#content-wrapper').toggleClass("toggled");
+    });
+  </script>
+  <script src="../js/destinos.js"></script>
+</body>
+</html>

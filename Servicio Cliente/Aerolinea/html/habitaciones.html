@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/stilos.css">
+    <script src="https://kit.fontawesome.com/39bf24cc1b.js" crossorigin="anonymous"></script>
+    
+</head>
+<body onload="obtenerHabitaciones()">
+    <div id="content-wrapper" class="d-flex toggled">
+      <div id="slidebar-container" class="bg-light border-right">
+        <div class="logo">
+          <div class="parteGenero"> 
+            <h3>Agencia de viajes</h3>
+          </div>
+        </div>
+        <div class="menu list-group-flush">
+          <a onclick="cambiarCatalogo(this)" class="list-group-item list-group-item-action bg-light border-0" id="anclaIndex">Inicio</a>
+          <a onclick="cambiarCatalogo(this)" class="list-group-item list-group-item-action bg-light border-0" id="anclaVuelos">Vuelos</a>
+          <a href="destinos.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaDestinos">Destinos</a>
+          <a onclick="cambiarCatalogo(this)" class="list-group-item list-group-item-action bg-light border-0" id="anclaHoteles">Hotel</a>
+          <a href="clientes.html" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaClientes">Clientes</a>
+          <a href="#" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaHabitaciones">Habitaciones</a>
+          <a href="reservaciones.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaReservaciones">Reservaciones</a>
+          <a href="estancias.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaEstancias" style="display: none;">Estancias</a>
+          <div class="dropdown-divider"></div>
+          <a href="tarjetas.html" onclick="cambiarCatalogo(this)" class="submenus list-group-item list-group-item-action bg-light border-0" id="anclaTarjetas" style="display: none;">Tarjetas</a>
+      </div>
+      </div>
+      <div id="page-container" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+          <button id="menu-toggle" class="btn btn-outline-white border-0">
+            <svg class="bi bi-justify" width="1.7em" height="1.7em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2 12.5a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5zm0-3a.5.5 0 01.5-.5h11a.5.5 0 010 1h-11a.5.5 0 01-.5-.5z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <div >
+            <h2 class="text-center">AGENCIA DE VIAJES</h2>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown" id="liFormulario">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="aFormulario">
+                    <svg class="bi bi-person" width="1.8em" height="1.8em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 00.014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 00.022.004zm9.974.056v-.002.002zM8 7a2 2 0 100-4 2 2 0 000 4zm3-2a3 3 0 11-6 0 3 3 0 016 0z" clip-rule="evenodd"/>
+                    </svg>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right" style="width: 233px !important;" id="divFormulario">
+                    <div id="divContainerMenu">
+                      <form class="px-4 py-3" id="formularioInicioSesión" method="POST">
+                        <div class="form-group">
+                          <label for="exampleDropdownFormEmail1">Usuario</label>
+                          <input type="text" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="mail" name="mail" placeholder="Maria ...">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleDropdownFormPassword1">Contraseña</label>
+                          <input type="password" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="password" name="password" placeholder="Contraseña">
+                        </div>
+                      </form>
+                      <button onclick="iniciarSesionUsuario()" id="btnInicioSesion" class="btn mx-4 btn btn-outline-success float-right">Iniciar Sesión</button>                     
+                      <br>
+                      <br>
+                    </div>
+                    <div id="divMenu" style="display: none;">
+                      <div class="dropdown-item" id="nombreUsuario">
+                        <h6 href="" id="hNombreUsuario" class="list-group-item list-group-item-action border-0"></h6>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </nav>
+        <div id="catalogo" class="p-4 mx-4 catalogoProductos">
+          <div id="divPintaCatalogo">
+              <div class="w-100">
+                <h3 style="display: inline;">Habitaciones</h3>
+                <button id="btnRegistrarHabitacion" onclick="abrirPopUpRegistroHbaitacion()" type="button" class="btn btn-success float-right" style="display: none;"><i class="fas fa-bed"></i> Añadir habitación</button>
+              </div>
+              <br>
+              <div>                  
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
+                      <li class="breadcrumb-item"><a href="#">Hoteles</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Habitaciones</li>
+                    </ol>
+                  </nav>
+              </div>
+              <div>
+                <table class="table" id="tablaClientes">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Número de Habitación</th>
+                                <th scope="col">Piso</th>
+                                <th scope="col">Número de camas</th>
+                                <th scope="col">Capacidad (personas)</th>
+                                <th scope="col">Tipo de habitación</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" id="colAcciones">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pintarFilas">
+
+                        </tbody>
+                    </tbody>
+                    </table> 
+                </table>
+              </div>
+              <div class="overlay" id="overlay" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpRegistroHabitacion(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Hotel</h2>
+                  <h3>Añadir cliente</h3>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioRegistrarHabitacion" style="max-height: 280px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="contenedor-inputs">
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroHabitacion" name="txtNumeroHabitacion" placeholder="Ingresa el número de habitación">  
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroPiso" name="txtNumeroPiso" placeholder="Ingresa el piso en el que se encuentra">
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroCamas" name="txtNumeroCamas" placeholder="Ingresa el número de camas">
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroPersonas" name="txtNumeroPersonas" placeholder="Ingresa el número de personas permitidas">
+                      <label for="nombre" >Tipos de habitación</label>
+                      <br>
+                      <select name="tipoHabitacion" id="tipoHabitacion">
+                          <option value="Sencilla">Sencilla</option>
+                          <option value="Doble">Doble</option>
+                          <option value="Junior">Junior</option>
+                          <option value="Suite">Suite</option>
+                      </select> 
+                      <br>
+                      <label for="nombre" >Status</label>
+                      <br>
+                      <select name="statusHabitacion" id="statusHabitacion">
+                        <option value="Disponible">Disponible</option>
+                        <option value="Sencilla">Ocupada</option>
+                      </select> 
+                    </div>
+                  </form>
+                  <button onclick="btnRegistroHabitacion()" class="btn-submit btn mx-4 btn btn-outline-success">Registrar cliente</button>
+                  <button onclick="" class=" btn mx-4 btn btn-outline-danger">cancelar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="modalConfirmarEliminarCliente">
+                <div class="modal fade" id="modalConfirmarEliminarHabitacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Habitacion</h5>
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Estás seguro de querer eliminar esta habitación?</p>
+                        <p>Se perderá toda la información relacionada a esta</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
+                        <button onclick="confirmarEliminarHabitacion()" type="submit" class="btn btn-outline-danger" data-dismiss="modal">Eliminar habitación</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="overlay" id="overlay1" style="display: none;">
+                <div class="popup">
+                  <a onclick="cerrarPopUpRegistroHabitacion(this)" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+                  <h2>Hotel</h2>
+                  <h3>Añadir cliente</h3>
+                  <div class="dropdown-divider"></div>
+                  <div id="divEscondeFormularioActualización">
+                    <form method="POST" id="formularioActualizarHabitacion" style="max-height: 280px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="contenedor-inputs">
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroHabitacion1" name="txtNumeroHabitacion" placeholder="Ingresa el número de habitación">  
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroPiso1" name="txtNumeroPiso" placeholder="Ingresa el piso en el que se encuentra">
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroCamas1" name="txtNumeroCamas" placeholder="Ingresa el número de camas">
+                      <input type="number" class="form-control bg-light border-top-0 border-right-0 border-left-0 rounded-0 border-secondary" id="txtNumeroPersonas1" name="txtNumeroPersonas" placeholder="Ingresa el número de personas permitidas">
+                      <label for="nombre" >Tipos de habitación</label>
+                      <br>
+                      <select name="tipoHabitacion" id="tipoHabitacion">
+                          <option value="Sencilla">Sencilla</option>
+                          <option value="Doble">Doble</option>
+                          <option value="Junior">Junior</option>
+                          <option value="Suite">Suite</option>
+                      </select> 
+                      <br>
+                      <label for="nombre" >Status</label>
+                      <br>
+                      <select name="statusHabitacion" id="statusHabitacion">
+                        <option value="Disponible">Disponible</option>
+                        <option value="Ocupada">Ocupada</option>
+                      </select> 
+                    </div>
+                  </form>
+                  <button onclick="btnActualizarHabitacion()" class="btn-submit btn mx-4 btn btn-outline-success">Actualizar habitación</button>
+                  <button onclick="" class=" btn mx-4 btn btn-outline-danger">cancelar</button>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script>
+    $("#menu-toggle").click(function (e){
+      e.preventDefault();
+      $('#content-wrapper').toggleClass("toggled");
+    });
+  </script>
+  <script src="../js/habitaciones.js"></script>
+</body>
+</html>
